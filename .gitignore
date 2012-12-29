@@ -15,7 +15,7 @@ npm-debug.log
 
 node_modules
 test/*
-*.sublime*
 memo/*
 .npmignore
+
 Gruntfile.*
