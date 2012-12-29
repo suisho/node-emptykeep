@@ -15,15 +15,19 @@ module.exports = (grunt) ->
         options :
           reporter: "nyan"
     jshint : 
-      all:["test/*.js","*.js"]
+      all:["*.js"]
       options : 
         node : true
     watch:
       files :["test/*.js","*.js"]
       tasks : ["default"]
+      #options :
+        #interrupt : true
+        
   ########
   # regist
   ########
-  grunt.registerTask 'default', ['jshint', 'simplemocha']
+  
   grunt.registerTask 'test', ['simplemocha']
   grunt.registerTask 'w', ['default',"watch"]
+  grunt.registerTask 'default', ['jshint', 'test']
