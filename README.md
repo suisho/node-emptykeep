@@ -1,5 +1,5 @@
-# node-gitkeep
-create .gitkeep file to empty directory
+# node-emptykeep
+Create keep file (default is .gitkeep) file to empty directory
 touchgitkeep
 ## usage
 ```js
