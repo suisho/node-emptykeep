@@ -1,0 +1,25 @@
+{
+  "name": "node-gitkeep",
+  "version": "0.0.0",
+  "description": "Create .gitkeep to empty directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "mocha": "~1.7.4",
+    "grunt-simple-mocha": "~0.3.1",
+    "grunt-contrib-watch": "~0.1.4",
+    "fs-extra": "~0.3.2"
+  },
+  "dependencies": {
+    "fs-extra": "~0.3.2",
+    "clone": "~0.1.5",
+    "recursive-readdir": "0.0.1",
+    "glob": "~3.1.14",
+    "touch": "0.0.2"
+  }
+}
