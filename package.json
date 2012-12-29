@@ -13,7 +13,9 @@
     "mocha": "~1.7.4",
     "grunt-simple-mocha": "~0.3.1",
     "grunt-contrib-watch": "~0.1.4",
-    "fs-extra": "~0.3.2"
+    "fs-extra": "~0.3.2",
+    "jshint": "~0.9.1",
+    "grunt-contrib-jshint": "~0.1.0"
   },
   "dependencies": {
     "fs-extra": "~0.3.2",
