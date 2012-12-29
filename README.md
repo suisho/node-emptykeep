@@ -1,4 +1,4 @@
-# node-emptykeep
+# emptykeep
 Create keep file (default is .gitkeep) file to empty directory
 touchgitkeep
 ## usage
