@@ -1,5 +1,5 @@
 {
-  "name": "node-gitkeep",
+  "name": "gitkeep",
   "version": "0.0.0",
   "description": "Create .gitkeep to empty directory",
   "main": "index.js",
