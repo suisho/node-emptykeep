@@ -1,33 +1,33 @@
 module.exports = (grunt) ->
   ########
-  # load 
+  # load
   ########
   grunt.loadNpmTasks 'grunt-simple-mocha'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   ########
-  # init 
+  # init
   ########
   grunt.initConfig
     simplemocha:
-      all : 
+      all :
         src :"test/*.js"
         options :
           reporter: "nyan"
-    jshint : 
+    jshint :
       all:["*.js"]
-      options : 
-        node : true
+      options :
+        jshintrc : ".jshintrc"
     watch:
       files :["test/*.js","*.js"]
       tasks : ["default"]
       #options :
         #interrupt : true
-        
+
   ########
   # regist
   ########
-  
+
   grunt.registerTask 'test', ['simplemocha']
   grunt.registerTask 'w', ['default',"watch"]
   grunt.registerTask 'default', ['jshint', 'test']
