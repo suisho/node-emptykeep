@@ -9,8 +9,7 @@
     if(typeof options === 'function') cb = options, options = {};
     if(!options) options = {};
     var opt = clone(options);
-
-    opt.targetDir = path.resolve(targetDir);
+    opt.targetDir = targetDir;
     opt.callback = cb;
     return new GitKeep(opt);
   };
@@ -31,6 +30,15 @@
 
 
   GitKeep.prototype.touchEmptyKeep =function(targetDir, touchFileName){
+    // node-glob is too slow when set array pattern
+    if(typeof targetDir !== 'string'){
+      throw new Error('Target dir is not string');
+    }
+    //resolve
+    targetDir = path.resolve(targetDir);
+    // check exist
+    fs.statSync(targetDir)
+
     var find = glob.sync(targetDir + '/**');
     var emptyDir = [];
     if(find.length === 0){
