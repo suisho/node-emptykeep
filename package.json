@@ -9,6 +9,7 @@
   "repository": "git://github.com/suisho/node-emptykeep.git",
   "author": "suisho",
   "license": "BSD",
+  "keywords": ["empty", "gitkeep", "directory"],
   "devDependencies": {
     "mocha": "~1.7.4",
     "grunt-simple-mocha": "~0.3.1",
