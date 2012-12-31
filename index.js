@@ -17,15 +17,16 @@
   var GitKeep = function(opt){
     this.cb = opt.cb;
     opt.keepFileName = opt.keepFileName || '.gitkeep';
+    if(typeof opt.callback !== "function"){
+      throw new Error("callback is not function");
+    }
     var err = null;
     try{
       this.touchEmptyKeep(opt.targetDir,opt.keepFileName);
     }catch(e){
-      err = e;
+      return opt.callback(e);
     }
-    if(typeof opt.callback === 'function'){
-      opt.callback(err);
-    }
+    opt.callback(err);
   };
 
 
