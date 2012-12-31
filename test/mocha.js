@@ -1,10 +1,10 @@
 'use strict';
-var path = require("path");
-var fs = require("fs-extra");
-var assert = require("assert");
-var gitkeep = require("../");
-var touch = require("touch");
 
+var path    = require("path");
+var fs      = require("fs-extra");
+var assert  = require("assert");
+var emptykeep = require("../");
+var touch   = require("touch");
 function setupFixture(dir){
   fs.mkdirsSync(dir+"/empty");
   fs.mkdirsSync(dir+"/not_empty");
@@ -21,7 +21,7 @@ function _assert(dir, name){
   assert.ok(!fs.existsSync(path.join(dir,'/tree/tree/not_empty/'+name)))
 }
 
-function test(fixture){
+function successTest(fixture){
   describe('test dir '+ fixture, function () {
     beforeEach(function (done) {
       try{ fs.removeSync(fixture); }catch(e){}
@@ -29,14 +29,14 @@ function test(fixture){
       done();
     });
     it('Finding', function (done) {
-      gitkeep(fixture,function(){
+      emptykeep(fixture,function(){
         _assert(fixture)
         done();
       });
     });
     it('array', function (done) {
-      // test!
-      gitkeep([fixture], function(){
+      done();
+      emptykeep([fixture], function(){
         _assert(fixture)
         done();
       });
@@ -45,7 +45,7 @@ function test(fixture){
       var opt = {
         keepFileName : "keepme"
       };
-      gitkeep(fixture,opt,function(){
+      emptykeep(fixture,opt,function(){
         _assert(fixture, "keepme")
         done();
       });
