@@ -1,8 +1,8 @@
+'use strict';
 var path = require("path");
 var fs = require("fs-extra");
 var assert = require("assert");
 var gitkeep = require("../");
-var fixture = "test/fixture";
 var touch = require("touch");
 
 function setupFixture(dir){
@@ -13,38 +13,51 @@ function setupFixture(dir){
   fs.mkdirsSync(dir+"/tree/tree/not_empty");
   touch.sync(dir+"/tree/tree/not_empty/foo.txt");
 }
+function _assert(dir, name){
+  name = name || ".gitkeep";
+  assert.ok(fs.existsSync(path.join(dir, '/empty/'+name)))
+  assert.ok(!fs.existsSync(path.join(dir,'/not_empty/'+name)))
+  assert.ok(fs.existsSync(path.join(dir, '/tree/tree/empty/'+name)))
+  assert.ok(!fs.existsSync(path.join(dir,'/tree/tree/not_empty/'+name)))
+}
 
-describe('keep', function () {
-  beforeEach(function (done) {
-    try{ fs.removeSync(fixture); }catch(e){}
-    setupFixture(fixture);
-    done();
-  });
-  it('Finding', function (done) {
-    // test!
-    gitkeep(fixture,function(){
-      assert.ok(fs.existsSync("./test/fixture/empty/.gitkeep"));
-      assert.ok(!fs.existsSync("./test/fixture/not_empty/.gitkeep"));
-      assert.ok(fs.existsSync("./test/fixture/tree/tree/empty/.gitkeep"));
-      assert.ok(!fs.existsSync("./test/fixture/tree/tree/not_empty/.gitkeep"));
+function test(fixture){
+  describe('test dir '+ fixture, function () {
+    beforeEach(function (done) {
+      try{ fs.removeSync(fixture); }catch(e){}
+      setupFixture(fixture);
+      done();
+    });
+    it('Finding', function (done) {
+      gitkeep(fixture,function(){
+        _assert(fixture)
+        done();
+      });
+    });
+    it('array', function (done) {
+      // test!
+      gitkeep([fixture], function(){
+        _assert(fixture)
+        done();
+      });
+    });
+    it('Name option', function (done) {
+      var opt = {
+        keepFileName : "keepme"
+      };
+      gitkeep(fixture,opt,function(){
+        _assert(fixture, "keepme")
+        done();
+      });
+    });
+    after(function (done) {
+      try{ fs.removeSync(fixture); }catch(e){console.log(e);}
       done();
     });
   });
-  it('Name option', function (done) {
-    var opt = {
-      keepFileName : "keepme"
-    };
-    // test!
-    gitkeep(fixture,opt,function(){
-      assert.ok(fs.existsSync("./test/fixture/empty/keepme"));
-      assert.ok(!fs.existsSync("./test/fixture/not_empty/keepme"));
-      assert.ok(fs.existsSync("./test/fixture/tree/tree/empty/keepme"));
-      assert.ok(!fs.existsSync("./test/fixture/tree/tree/not_empty/.keepme"));
-      done();
-    });
-  });
-  after(function (done) {
-    try{ fs.removeSync(fixture); }catch(e){console.log(e);}
-    done();
-  });
-});
+}
+test("./test/fixture");
+test("test/fixture")
+test("test/fixture/");
+test(path.resolve("test/fixture"));
+
