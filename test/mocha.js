@@ -56,8 +56,11 @@ function successTest(fixture){
     });
   });
 }
-test("./test/fixture");
-test("test/fixture")
-test("test/fixture/");
-test(path.resolve("test/fixture"));
+
+setupFixture("./test/fixture")
+
+successTest("./test/fixture");
+successTest("test/fixture")
+successTest("test/fixture/");
+successTest(path.resolve("test/fixture"));
 
