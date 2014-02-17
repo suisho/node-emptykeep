@@ -35,7 +35,6 @@ function successTest(fixture){
       });
     });
     it('array', function (done) {
-      done();
       emptykeep([fixture], function(){
         _assert(fixture)
         done();
