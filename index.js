@@ -4,16 +4,17 @@ var path = require('path'),
     glob = require('glob'),
     fs = require('fs'),
     touch = require('touch');
-var gitkeep = function(targetDir, options, cb){
+
+var emptykeep = function(targetDir, options, cb){
   if(typeof options === 'function') cb = options, options = {};
   if(!options) options = {};
   var opt = clone(options);
   opt.targetDir = targetDir;
   opt.callback = cb;
-  return new GitKeep(opt);
+  return new EmptyKeep(opt);
 };
 
-var GitKeep = function(opt){
+var EmptyKeep = function(opt){
   this.cb = opt.cb;
   opt.keepFileName = opt.keepFileName || '.gitkeep';
   if(typeof opt.callback !== "function"){
@@ -21,7 +22,7 @@ var GitKeep = function(opt){
   }
   var err = null;
   try{
-    this.touchEmptyKeep(opt.targetDir,opt.keepFileName);
+    this.touch(opt.targetDir,opt.keepFileName);
   }catch(e){
     return opt.callback(e);
   }
@@ -29,7 +30,7 @@ var GitKeep = function(opt){
 };
 
 
-GitKeep.prototype.touchEmptyKeep =function(targetDir, touchFileName){
+EmptyKeep.prototype.touch =function(targetDir, touchFileName){
   // node-glob is too slow when set array pattern
   if(typeof targetDir !== 'string'){
     throw new Error('Target dir is not string');
@@ -59,4 +60,4 @@ GitKeep.prototype.touchEmptyKeep =function(targetDir, touchFileName){
   return emptyDir;
 };
 
-module.exports = gitkeep;
+module.exports = emptykeep;
