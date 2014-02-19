@@ -34,12 +34,13 @@ function successTest(fixture){
         done();
       });
     });
-    it('array', function (done) {
+    // FUTURE: Array support
+    /*it('array', function (done) {
       emptykeep([fixture], function(){
         _assert(fixture)
         done();
       });
-    });
+    });*/
     it('Name option', function (done) {
       var opt = {
         keepFileName : "keepme"
