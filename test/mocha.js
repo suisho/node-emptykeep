@@ -34,13 +34,13 @@ function successTest(fixture){
         done();
       });
     });
-    it('array', function (done) {
-      done();
+    // FUTURE: Array support
+    /*it('array', function (done) {
       emptykeep([fixture], function(){
         _assert(fixture)
         done();
       });
-    });
+    });*/
     it('Name option', function (done) {
       var opt = {
         keepFileName : "keepme"
@@ -56,8 +56,11 @@ function successTest(fixture){
     });
   });
 }
-test("./test/fixture");
-test("test/fixture")
-test("test/fixture/");
-test(path.resolve("test/fixture"));
+
+setupFixture("./test/fixture")
+
+successTest("./test/fixture");
+successTest("test/fixture")
+successTest("test/fixture/");
+successTest(path.resolve("test/fixture"));
 
